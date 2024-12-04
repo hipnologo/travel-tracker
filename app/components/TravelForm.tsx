@@ -25,15 +25,15 @@ export default function TravelForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="bg-white/95 backdrop-blur-sm p-8 rounded-2xl shadow-xl">
-      <h2 className="text-3xl font-bold text-indigo-900 mb-8">Add New Travel</h2>
+    <form onSubmit={handleSubmit(onSubmit)} className="bg-white p-6 rounded-lg shadow-md">
+      <h2 className="text-2xl font-semibold mb-6">Add New Travel</h2>
       
-      <div className="space-y-6">
+      <div className="grid gap-4">
         <div>
-          <label className="block text-lg font-medium text-gray-700 mb-2">Transport Mode</label>
+          <label className="block text-sm font-medium text-gray-700">Transport Mode</label>
           <select
             {...register('mode')}
-            className="w-full rounded-xl border-2 border-indigo-100 p-4 text-lg focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all"
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary"
           >
             {transportModes.map(mode => (
               <option key={mode} value={mode}>
@@ -43,64 +43,60 @@ export default function TravelForm() {
           </select>
         </div>
 
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-lg font-medium text-gray-700 mb-2">Origin</label>
+            <label className="block text-sm font-medium text-gray-700">Origin</label>
             <input
               type="text"
               {...register('origin')}
-              className="w-full rounded-xl border-2 border-indigo-100 p-4 text-lg focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all"
-              placeholder="From"
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary"
             />
           </div>
 
           <div>
-            <label className="block text-lg font-medium text-gray-700 mb-2">Destination</label>
+            <label className="block text-sm font-medium text-gray-700">Destination</label>
             <input
               type="text"
               {...register('destination')}
-              className="w-full rounded-xl border-2 border-indigo-100 p-4 text-lg focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all"
-              placeholder="To"
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary"
             />
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-lg font-medium text-gray-700 mb-2">Duration (mins)</label>
+            <label className="block text-sm font-medium text-gray-700">Duration (minutes)</label>
             <input
               type="number"
               {...register('duration')}
-              className="w-full rounded-xl border-2 border-indigo-100 p-4 text-lg focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all"
-              placeholder="120"
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary"
             />
           </div>
 
           <div>
-            <label className="block text-lg font-medium text-gray-700 mb-2">Distance (km)</label>
+            <label className="block text-sm font-medium text-gray-700">Distance (km)</label>
             <input
               type="number"
               step="0.1"
               {...register('distance')}
-              className="w-full rounded-xl border-2 border-indigo-100 p-4 text-lg focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all"
-              placeholder="100"
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary"
             />
           </div>
         </div>
 
         <div>
-          <label className="block text-lg font-medium text-gray-700 mb-2">Date</label>
+          <label className="block text-sm font-medium text-gray-700">Date</label>
           <input
             type="date"
             {...register('date')}
-            className="w-full rounded-xl border-2 border-indigo-100 p-4 text-lg focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all"
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary"
           />
         </div>
 
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-xl font-semibold py-4 px-6 rounded-xl hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-70"
+          className="w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-primary/90 transition-colors"
         >
           {loading ? 'Adding...' : 'Add Travel'}
         </button>
