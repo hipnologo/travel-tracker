@@ -1,14 +1,10 @@
-import { Database } from 'sqlite3';
-import { open } from 'sqlite';
+import { tblrx } from '@vlcn.io/crsqlite-wasm';
 
 let db: any = null;
 
 export async function getDb() {
   if (!db) {
-    db = await open({
-      filename: './travel.db',
-      driver: Database
-    });
+    db = await tblrx.createDB();
     
     await db.exec(`
       CREATE TABLE IF NOT EXISTS travels (
@@ -26,3 +22,37 @@ export async function getDb() {
   }
   return db;
 }
+
+export async function getAllTravels() {
+  const db = await getDb();
+  return db.execO("SELECT * FROM travels ORDER BY date DESC");
+}
+
+export async function addTravel(travel: {
+  mode: string;
+  origin: string;
+  destination: string;
+  duration: number;
+  distance: number;
+  date: string;
+  cost?: number;
+  notes?: string;
+}) {
+  const db = await getDb();
+  const result = await db.exec(
+    `INSERT INTO travels (mode, origin, destination, duration, distance, date, cost, notes)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+    [
+      travel.mode,
+      travel.origin,
+      travel.destination,
+      travel.duration,
+      travel.distance,
+      travel.date,
+      travel.cost || null,
+      travel.notes || null
+    ]
+  );
+  return result;
+}
+
